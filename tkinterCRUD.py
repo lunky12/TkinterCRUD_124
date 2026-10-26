@@ -49,3 +49,35 @@ def submit_data():
     prediksi = "Bahasa"
   else:
     prediksi = "Umum / Nilai Bersaing Sama"
+
+  # Menyimpan data ke database SQLite
+  try:
+    conn = sqlite3.connect("database_siswa.db")
+    cursor = conn.cursor()
+    cursor.execute(
+        """
+            INSERT INTO nilai_siswa (nama_siswa, biologi, fisika, inggris, prediksi_fakultas)
+            VALUES (?, ?, ?, ?, ?)
+        """,
+        (nama, biologi, fisika, inggris, prediksi),
+    )
+    conn.commit()
+    conn.close()
+
+    messagebox.showinfo(
+        "Sukses",
+        f"Data berhasil disimpan!\nPrediksi Fakultas: {prediksi}",
+    )
+    clear_entries()
+  except Exception as e:
+    messagebox.showerror("Error", f"Gagal menyimpan ke database: {e}")
+
+
+def clear_entries():
+  """Mengosongkan input field setelah submit"""
+  entry_nama.delete(0, tk.END)
+  entry_biologi.delete(0, tk.END)
+  entry_fisika.delete(0, tk.END)
+  entry_inggris.delete(0, tk.END)
+
+
