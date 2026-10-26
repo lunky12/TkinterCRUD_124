@@ -21,3 +21,21 @@ def buat_tabel():
   conn.close()
 
 
+def submit_data():
+  """Fungsi untuk memproses nilai, memprediksi fakultas, dan menyimpan ke SQLite"""
+  nama = entry_nama.get()
+
+  # Validasi input kosong
+  if not nama:
+    messagebox.showwarning("Peringatan", "Nama siswa tidak boleh kosong!")
+    return
+
+  try:
+    biologi = int(entry_biologi.get())
+    fisika = int(entry_fisika.get())
+    inggris = int(entry_inggris.get())
+  except ValueError:
+    messagebox.showerror(
+        "Error", "Nilai Biologi, Fisika, dan Inggris harus berupa angka!"
+    )
+    return
