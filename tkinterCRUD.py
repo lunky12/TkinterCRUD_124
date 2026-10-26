@@ -39,3 +39,13 @@ def submit_data():
         "Error", "Nilai Biologi, Fisika, dan Inggris harus berupa angka!"
     )
     return
+
+  # Logika Penentuan Prediksi Fakultas Berdasarkan Nilai Tertinggi
+  if biologi > fisika and biologi > inggris:
+    prediksi = "Kedokteran"
+  elif fisika > biologi and fisika > inggris:
+    prediksi = "Teknik"
+  elif inggris > biologi and inggris > fisika:
+    prediksi = "Bahasa"
+  else:
+    prediksi = "Umum / Nilai Bersaing Sama"
